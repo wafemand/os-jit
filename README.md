@@ -19,3 +19,11 @@
 в runtime. Например, вы можете получить аргументом вызова вашей программы
 какое-то число и пропатчить машинный код этим числом. Эта часть задания будет
 оцениваться в дополнительные баллы.
+
+# Usage
+
+`./os-jit <code file>`
+
+Interpret Brainfuck code with Just-In-Time optimization
+
+Interpreted program reads symbols from stdin and writes to stdout
