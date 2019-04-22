@@ -1,8 +1,6 @@
-#include <utility>
-
 #pragma once
 
-
+#include <utility>
 #include <vector>
 #include <cstdint>
 #include <bits/mman.h>
@@ -163,9 +161,9 @@ public:
             if (ret == -1) {
                 throw CompilerException("Cannot change permission because\n" +
                                         error + "\n"
-                                        "and cannot unmap memory because\n" +
+                                                "and cannot unmap memory because\n" +
                                         strerror(errno) + "\n"
-                                        "Double fail :((\n");
+                                                          "Double fail :((\n");
             } else {
                 throwWithErrno("Cannot change permission for allocated memory.\n");
             }
