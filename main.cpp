@@ -25,7 +25,7 @@ void printUsage() {
 }
 
 
-int main(int argc, char *argv[], char *envp[]) {
+int main(int argc, char *argv[]) {
     InterpreterJIT interpreter(TAPE_SIZE, STDIN_FILENO, STDOUT_FILENO);
 
     if (argc != 2) {

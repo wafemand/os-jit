@@ -31,7 +31,6 @@ class Compiler {
             0, 0, 0, 0, 0, 0, 0, 0 // <headPos> will be set in runLastCycle()
     };
 
-
     byteVector suffix = {
             0x48, 0x89, 0xD8, // mov rax,rbx
             0x5d,             // pop %rbp
@@ -68,21 +67,15 @@ class Compiler {
         }
     }
 
-
     void throwWithErrno(std::string const &msg) {
         std::string error = strerror(errno);
         throw CompilerException(msg + error);
     }
 
-
-
-
-
 public:
     Compiler(uint8_t *tapePtr, int fdIn, int fdOut)
             : tapePtr(tapePtr), fdIn(fdIn), fdOut(fdOut) {
     }
-
 
     void _left_() {
         addCode({0x48, 0xFF, 0xCB}); // dec rbx
@@ -142,7 +135,6 @@ public:
         lastCycle = body.size() - diff;
     }
 
-
     size_t runLastCycle(size_t headPos) { // returns new head position
         size_t lastCycleSize = body.size() - lastCycle;
         size_t code_size = prefix.size() + lastCycleSize + suffix.size();
@@ -192,18 +184,15 @@ class InterpreterJIT {
     int balance = 0;
     int skipCommandsLevel = 0;
 
-
 public:
     InterpreterJIT(size_t tapeSize, int fdIn, int fdOut)
             : tape(tapeSize, 0), headPos(0),
               fdIn(fdIn), fdOut(fdOut),
               compiler(tape.data(), fdIn, fdOut) {}
 
-
     bool shouldSkip() {
         return skipCommandsLevel != 0;
     }
-
 
     void applyCommand(char c) {
         switch (c) {
