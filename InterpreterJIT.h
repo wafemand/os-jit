@@ -148,7 +148,7 @@ public:
                 PROT_WRITE | PROT_READ,
                 MAP_ANONYMOUS | MAP_PRIVATE,
                 -1, 0);
-        if (code_ptr == (uint8_t*)-1) {
+        if (code_ptr == (uint8_t *) -1) {
             throwWithErrno("Cannot allocate memory for code.\n");
         }
 
@@ -158,7 +158,17 @@ public:
 
         int ret = mprotect(code_ptr, code_size, PROT_EXEC | PROT_READ);
         if (ret == -1) {
-            throwWithErrno("Cannot change permission for allocated memory.\n");
+            std::string error = strerror(errno);
+            ret = munmap(code_ptr, code_size);
+            if (ret == -1) {
+                throw CompilerException("Cannot change permission because\n" +
+                                        error + "\n"
+                                        "and cannot unmap memory because\n" +
+                                        strerror(errno) + "\n"
+                                        "Double fail :((\n");
+            } else {
+                throwWithErrno("Cannot change permission for allocated memory.\n");
+            }
         }
 
         size_t (*nativeLastCycle)();
