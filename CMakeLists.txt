@@ -3,4 +3,4 @@ project(os-jit)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(os-jit main.cpp main.cpp InterpreterJIT.h)
+add_executable(os-jit main.cpp InterpreterJIT.h)
