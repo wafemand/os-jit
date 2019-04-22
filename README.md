@@ -27,3 +27,5 @@
 Interpret Brainfuck code with Just-In-Time optimization
 
 Interpreted program reads symbols from stdin and writes to stdout
+
+Use `./run_tests <interpreter executable>` for running tests
