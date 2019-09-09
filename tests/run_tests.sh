@@ -22,8 +22,9 @@ for test in $(find . ! -path . -type d -printf "%f\n"); do
     fi
 
     time ${INTERPRETER} "${test}.bf" <"${INPUT}" >"output.txt"
-
-    if cmp -s "correct.txt" "output.txt" ; then
+    
+    DIFF=$(diff --strip-trailing-cr "correct.txt" "output.txt")
+    if [ "$DIFF" == "" ] ; then
         echo "CORRECT"
     else
         echo "FAILED"
